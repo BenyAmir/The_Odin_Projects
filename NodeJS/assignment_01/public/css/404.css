@@ -1,0 +1,116 @@
+@layer reset, utilities;
+
+@import url("reset.css") layer(reset);
+@import url("utilities.css") layer(utilities);
+
+html {
+  font-size: 3.2vmin;
+}
+
+main {
+  height: 100%;
+  display: grid;
+  place-content: center;
+}
+
+.notfound {
+  width: 100%;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.sup-title {
+  font-family: cabin, sans-serif;
+  font-size: min(1rem, 16px);
+  letter-spacing: 3px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #000;
+}
+
+.title {
+  font-family: montserrat, sans-serif;
+  font-size: min(16rem, 252px);
+  letter-spacing: -30px;
+  font-weight: 900;
+  line-height: 0.75;
+  color: #262626;
+  margin-bottom: 1rem;
+  transform: translateX(-15px);
+}
+
+.title > span {
+  text-shadow: -8px 0 0 #fff;
+}
+
+.sub-title {
+  font-family: cabin, sans-serif;
+  font-size: min(1.3rem, 20px);
+  font-weight: 400;
+  text-wrap: balance;
+}
+
+.container{
+  filter:blur(4px) contrast(18);
+  background-color: #fff;
+  padding: 1rem 0;
+}
+
+.particle {
+  display: block;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  animation: impulse 8s ease-in-out both alternate infinite;
+  position: absolute;
+  mix-blend-mode: screen;
+}
+
+.number1 {
+  width: 2rem;
+  left: 45%;
+  top: 8%;
+  background: radial-gradient(red, red);
+}
+.number2 {
+  width: 2.4rem;
+  left: 30%;
+  top: 60%;
+  background: radial-gradient(red, blue);
+}
+.number3 {
+  width: 2.8rem;
+  left: 65%;
+  top: 35%;
+  background: radial-gradient(red, blue);
+}
+.tracker {
+  display: block;
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  aspect-ratio: 1;
+  width: 1.5rem;
+  background: radial-gradient(coral,red);
+  border-radius: 50%;
+  transform: translate(0, 0);
+}
+
+.tracker.visible{
+  opacity: 1;
+  visibility: initial;
+}
+
+@keyframes impulse {
+  0% {
+    scale: 1;
+  }
+
+  70% {
+    scale: 2;
+  }
+
+  100% {
+    scale: 1.6;
+  }
+}

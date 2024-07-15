@@ -1,0 +1,52 @@
+@layer reset;
+
+@import url('./reset.css') layer(reset);
+
+:root {
+    --nav-height: 80px;
+    --divide-1: 35;
+  --divide-2: 30;
+  --divide-sum: calc(var(--divide-1) + var(--divide-2));
+  }
+
+  nav {
+    display: grid;
+    grid-template-columns:
+      calc(var(--divide-1) * 1vw)
+      calc(var(--divide-2) * 1vw)
+      calc(var(--divide-1) * 1vw);
+    align-items: center;
+    height: var(--nav-height);
+    text-transform: uppercase;
+  }
+  
+  .logo {
+    font-family: cursive;
+    font-size: 1.5vmax;
+    text-align: center;
+  }
+  
+  nav .menu {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 3dvw;
+    height: 100%;
+    padding: 0;
+    font-size: 1.2vmax;
+  }
+
+  @media screen and (width < 768px) {
+    :root {
+      --nav-height: 50px;
+      --divide-1: 25;
+      --divide-2: 50;
+  
+    }
+  
+    nav .menu {
+      font-size: 2vmax;
+    }
+  }  
+  
