@@ -1,6 +1,10 @@
+
 import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
+import {fileURLToPath} from "node:url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const server = http.createServer((req, res) => {
   let { url } = req;
