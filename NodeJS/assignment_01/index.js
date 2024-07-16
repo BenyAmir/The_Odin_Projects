@@ -1,9 +1,9 @@
-const http = require("http");
-const fs = require("fs");
-const path = require("path");
+import http from "node:http";
+import fs from "node:fs";
+import path from "node:path";
 
 const server = http.createServer((req, res) => {
-  let { url, method } = req;
+  let { url } = req;
 
   let filePath;
   const lastDotIndex = url.lastIndexOf(".");
@@ -15,7 +15,7 @@ const server = http.createServer((req, res) => {
     ".png": "image/png",
     ".js": "text/javascript",
     "ico": "image/x-icon"
-  }[url.substr(lastDotIndex)];
+  }[url.substring(lastDotIndex)];
 
   res.setHeader("Content-Type", memType || "text/html");
 
