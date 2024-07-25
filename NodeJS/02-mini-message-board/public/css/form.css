@@ -1,0 +1,77 @@
+@layer reset, utilities;
+
+@import url('./reset.css') layer(reset);
+
+body{
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+header{
+    text-align: center;
+    display: grid;
+    grid-auto-flow: column;
+}
+
+.back-button{
+    background-color: blanchedalmond;
+    border: none;
+}
+
+.back-button a {
+    display: grid;
+    place-content: center;
+    height: 100%;
+}
+
+main{
+    display: grid;
+    place-content: center;
+    flex: 1;
+}
+
+form{
+    display: grid;
+    gap: 1rem;
+}
+
+.input{
+    display: flex;
+    flex-flow: column wrap;
+    gap: 4px;
+    position: relative;
+    height: 2rem;
+    justify-content: end;
+}
+
+input{
+    border: none;
+    line-height: 1.5;
+    border-bottom: 1px solid transparent;
+}
+
+input:focus{
+    border-bottom: 1px solid #444;
+}
+
+label{
+    pointer-events: none;
+    position: absolute;
+    line-height: 1.5;
+    transition: transform .5s ease;
+}
+
+input:focus + label,
+input.has + label
+{
+    transform: translateY(-100%);
+}
+
+button[type='submit'] {
+    border: 1px solid orange;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    background-color: orange;
+    margin-top: 2rem;
+}

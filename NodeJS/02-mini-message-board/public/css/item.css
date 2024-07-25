@@ -1,0 +1,28 @@
+@layer reset,utilities;
+
+@import url('./reset.css') layer(reset);
+
+body{
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+main{
+    flex: 1;
+    display: grid;
+    place-content: center;
+    grid: 1rem;
+}
+
+.back-button{
+    background-color: blanchedalmond;
+    border: none;
+    height: 100%;
+}
+
+.back-button a {
+    display: grid;
+    place-content: center;
+    height: 100%;
+    padding: 1rem;
+}

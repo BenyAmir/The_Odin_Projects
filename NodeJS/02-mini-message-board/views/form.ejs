@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Your new Message</title>
+    <link rel="stylesheet" type="text/css" href="./css/form.css" />
+  </head>
+  <body>
+    <header>
+        <button type="button" class="back-button"><a href="/">Back</a></button>
+        <h1>Create Your new Message</h1>
+    </header>
+    <main>
+      <form method="post" action="/new">
+        <div class="input">
+          <input type="text" id="user" name="user" onkeyup="checkValue(this)"/>
+          <label for="user">User</label>
+        </div>
+        <div class="input">
+          <input type="text" id="text" name="text" onkeyup="checkValue(this)"/>
+          <label for="text">Text</label>
+        </div>
+
+        <button type="submit">Submit</button>
+      </form>
+    </main>
+  </body>
+  <script>
+    function checkValue(el){
+        el.value ? el.classList.add('has') : el.classList.remove('has')
+    }
+  </script>
+</html>

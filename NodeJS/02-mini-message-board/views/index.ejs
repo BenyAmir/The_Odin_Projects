@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" type="text/css" href="./css/main.css"/>
+</head>
+<body>
+    <header>
+        <h1><%= title %></h1>
+    </header>
+    <main>
+        <% messages.map((message,index) =>{ %>
+            <a href="<%= itemsLink(index+1) %>" class="message-link" target="_blank">
+                <article>
+                    <h3><%=message.text %></h3>
+                    <h5><%=message.user %></h5>
+                    <h6><time datetime="<%= message.added.toISOString() %>"><%=new Intl.DateTimeFormat('en-US').format(message.added) %></time></h6>
+                </article> 
+            </a>
+       <% }) %>
+    </main>
+    <footer>
+        <button type="button" class="new-message"><a href="/new">New Message</a></button>
+    </footer>
+</body>
+</html>
