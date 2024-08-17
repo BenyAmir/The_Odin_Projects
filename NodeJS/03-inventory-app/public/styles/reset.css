@@ -1,0 +1,36 @@
+*,*:after,*:before{
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+html:focus-within {
+    scroll-behavior: smooth;
+}
+
+body {
+    padding: 0;
+    line-height: 1.5;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button{
+    margin: 0;
+    padding: 0;
+}
+
+h1,h2,h3,h4,h5,h6,p{
+    overflow-wrap: break-word;
+    text-wrap: balance;
+    cursor: default;
+}
+
+ul,ol {
+    list-style: none;
+}

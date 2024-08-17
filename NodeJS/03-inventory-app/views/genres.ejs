@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/header.ejs',{title}) %>
+
+  <body>
+    <%- include('./partials/nav.ejs') %> <% if (locals.genres) { %>
+    <ul class="grid">
+      <% genres.map(genre => { %>
+      <li>
+        <a href="genres/<%= genre.genre_id %>">
+          <div><strong>name: </strong> <span><%= genre.name %></span></div>
+        </a>
+      </li>
+      <% }) %>
+      <% } %>
+      <li>
+        <button class="new-item" type="button" onclick="handleAdd()">Add</button>
+      </li>
+    </ul>
+
+    <form action="/genres/add" method="post" id="new-genre-form" class="hidden">
+      <fieldset>
+        <legend>Add New Genre</legend>
+        <label for="genre">Add New Genre</label>
+        <input type="text" id="genre" name="name" />
+        <button type="submit" onclick="handleSubmit()">submit</button>
+      </fieldset>
+    </form>
+    
+    <script>
+      function handleAdd() {
+        document.getElementById("new-genre-form").classList.add("display");
+        document.querySelector(".grid").classList.add("hidden");
+      }
+      function handleSubmit() {
+        document.getElementById("new-genre-form").classList.add("hidden");
+        document.querySelector(".grid").classList.remove("hidden");
+      }
+    </script>
+  </body>
+</html>

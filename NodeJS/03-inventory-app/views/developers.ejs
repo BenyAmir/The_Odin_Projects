@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/header.ejs',{title}) %>
+
+
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <ul class="grid">
+            <% if (developers) { %>
+            <% developers.map(developer => { %>
+                <li>
+                    <a href="/developers/<%= developer.developer_id %>">
+                    <div><strong>name: </strong> <span><%= developer.name %></span></div>
+                    <div><strong>age: </strong> <span><%= developer.age %></span></div>
+                </a>
+            </li>
+            <% }) %>
+            <% } %>
+            <li>
+                <button class="new-item" type="button" onclick="handleAdd()">Add</button>
+            </li>
+            </ul>
+
+    <form action="/developers/add" method="post" id="new-developer-form" class="hidden">
+        <fieldset>
+            <legend>Add New Developer</legend>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name"/>
+            <label for="age">Age</label>
+            <input type="number" id="age" name="age"/>
+            <% if(games) { %>
+            <label for="games">Choose Game</label>
+        <select name="game_id" id="games">
+                <option value="">--Please choose an game--</option>
+            <% games.map(game => { %>
+                <option value="<%= game.game_id %>"><%= game.name %></option>
+            <% }) %>
+            <% } else { %>
+                <option>no games available</option>
+            <% } %>
+        </select>
+            <button type="submit" onclick="handleSubmit()">submit</button>
+        </fieldset>
+    </form>
+    <br/>
+    
+    <script>
+        function handleAdd(){
+            document.getElementById('new-developer-form').classList.add('display');
+            document.querySelector('.grid').classList.add('hidden');
+        }
+        function handleSubmit(){
+            document.getElementById('new-developer-form').classList.add('hidden');
+            document.querySelector('.grid').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

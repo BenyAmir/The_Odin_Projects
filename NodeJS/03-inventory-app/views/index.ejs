@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/header.ejs',{title}) %>
+<style>
+    .main{
+        display: grid;
+        place-content: center;
+    }
+
+    .tags {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .tags span {
+        padding: 0.5rem;
+        background-color: antiquewhite;
+        border-radius: 1rem;
+    }
+</style>
+<body>
+    <%- include('./partials/nav.ejs') %>
+
+    <div class="main"><h1>Welcome to Game Management System</h1>
+    </div>
+
+    <% if(data && games){ %>
+        <ul class="grid">
+            <% games.map(game => { %>
+                <li>
+                    <a href="games/<%= game.game_id %>">
+                    <strong><%= game.name %></strong>    
+                        <div class="tags">
+            <% data.filter(d => d.game_id == game.game_id).map(c => { %>
+                        <span><%= c.director %></span>
+            <% }) %>
+            </div> 
+        </a>
+            </li>
+            <% }) %>
+        </ul>
+
+    <% } %>
+
+</body>
+</html>

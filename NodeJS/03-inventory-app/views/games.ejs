@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/header.ejs',{title}) %>
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <ul class="grid">
+            <% if (games) { %>
+            <% games.map(game => { %>
+                <li>
+                    <a href="games/<%= game.game_id %>">
+                    <div><strong>name: </strong> <span><%= game.name %></span></div>
+                    <div><strong>year: </strong> <span><%= new Date(game.year).toLocaleDateString('en-US') %></span></div>
+                    <div><strong>rate: </strong> <span><%= game.rate %></span></div>
+                    <div><strong>genre: </strong> <span><%= genres.find(genre=>genre.genre_id == game.genre_id)['name'] %></span></div>
+                </a>
+                </li>
+                <% }) %>
+                <% } %>
+                <li>
+                    <button class="new-item" type="button" onclick="handleAdd()">Add</button>
+                </li> 
+    </ul>
+
+    <form action="/games/add" method="post" id="new-game-form" class="hidden">
+        <fieldset>
+            <legend>Add New Game</legend>
+        <label for="name">Text</label>
+        <input type="text" id="name" name="name">
+        <label for="rate">Rate</label>
+        <input type="text" id="rate" name="rate">
+        <label for="year">Year</label>
+        <input type="date" id="year" name="year">
+        <label for="genres">Choose Genres</label>
+        <select name="genre_id" id="genres">
+            <% if(genres) { %>
+                <option value="">--Please choose an Genre--</option>
+            <% genres.map(genre => { %>
+                <option value="<%= genre.genre_id %>"><%= genre.name %></option>
+            <% }) %>
+            <% } else { %>
+                <option>no genres available</option>
+            <% } %>
+        </select>
+        <button onclick="handleSubmit()" type="submit">submit</button>
+    </fieldset>
+    </form>
+    
+    <script>
+        function handleAdd(){
+            document.getElementById('new-game-form').classList.add('display');
+            document.querySelector('.grid').classList.add('hidden');
+        }
+        function handleSubmit(){
+            document.getElementById('new-game-form').classList.add('hidden');
+            document.querySelector('.grid').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

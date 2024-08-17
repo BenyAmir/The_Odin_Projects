@@ -1,0 +1,72 @@
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 250px);
+    gap: 1rem;
+    grid-auto-rows: 150px;
+    padding-block: 1rem;
+    place-content: center;
+}
+
+.grid li {
+    
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.grid a {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    background-color: lemonchiffon;
+}
+
+.new-item{
+    height: 100%;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+}
+
+.info{
+    display: grid;
+    place-content: center;
+
+}
+.buttons{
+    display: grid;
+    place-content: center;
+    grid-auto-flow: column;
+    gap: 0.5rem;
+    
+    button {
+        padding: .5rem;
+        cursor: pointer;
+    }
+    
+    img {
+        height: 1rem;
+        
+    }
+}
+
+form fieldset {
+    display: grid;
+}
+
+#form-buttons-wrapper{
+    margin-top: 2rem;
+}
+
+.hidden{
+    display: none;
+}
+
+.display{
+    display: grid;
+    place-content: center;
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/header.ejs',{title}) %>
+
+<body>
+    <%- include('./partials/nav.ejs') %>
+
+    <div class="info">
+        <div><strong>name: </strong> <span><%= genre.name %></span></div>
+    </div>
+    <form action="/genres/<%= genre.genre_id %>/update" method="post" id="update-genre" class="hidden">
+        <label for="genre">Genre</label>
+        <input type="text" id="genre" name="name" value="<%= genre.name %>"/>
+        <input type="hidden" name="genre_id" value="<%= genre.genre_id %>"/>
+        <div class="buttons" id="form-buttons-wrapper">
+            <button type="button" onclick="handleCancel()">cancel</button>
+            <button type="submit">submit</button>
+        </div>
+    </form>
+    <div class="buttons" id="action-buttons-wrapper">
+            <button type="button" data-id="<%=genre.genre_id%>" onclick="handleDelete(this.dataset.id)"><img src="/trash.svg"/></button>
+            <button type="button" onclick="handleEdit()"><img src="/edit.svg"/></button> 
+    </div>
+
+    <script>
+        function handleEdit(){
+            document.getElementById('action-buttons-wrapper').classList.add('hidden');
+            document.getElementById('update-genre').classList.add('display');
+            document.querySelector('.info').classList.add('hidden')
+        }
+        function handleCancel(){
+            document.getElementById('action-buttons-wrapper').classList.remove('hidden');
+            document.getElementById('update-genre').classList.remove('display');
+            document.querySelector('.info').classList.remove('hidden')
+        }
+
+        async function handleDelete(id){
+            try {
+                const response = await fetch(`/genres/${id}/delete`,{
+                    method:'post'
+                });
+                
+                const result = await response.json();
+                if(!result.ok){
+                    throw result
+                }
+                window.location.href = result.redirect
+            } catch (error) {
+                window.alert(error.message)
+            }
+        }
+    </script>
+</body>
+</html>

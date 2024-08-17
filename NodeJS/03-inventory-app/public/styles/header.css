@@ -1,0 +1,40 @@
+@layer reset;
+
+@import url('./reset.css') layer(reset);
+
+body{
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+header{
+    height: 100px;
+    display: grid;
+    place-content: end center;
+    gap: 0.5rem;
+    border-bottom: 2px solid coral;
+}
+
+header ~ * {
+flex: 1;
+}
+
+.title{
+    text-align: center;
+}
+
+.menu {
+    display: flex;
+    gap: 1rem;
+    padding: 0;
+}
+
+.menu a {
+    display: block;
+    padding:0.5rem;
+    &:hover {
+        background-color: coral;
+
+    }
+}
