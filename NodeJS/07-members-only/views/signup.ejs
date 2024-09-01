@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" type="text/css" href="/global.css"/>
+</head>
+<body>
+    <h1>Register to this amazing Club House </h1>
+
+    <div class="form-container">
+    <form action="/auth/signup" method="POST" >
+
+        <div class="input-wrapper"><label for="first">First Name</label>
+        <input type="text" id="first" name="firstName" />
+        </div>
+
+        <div class="input-wrapper"><label for="last">Last Name</label>
+        <input type="text" id="last" name="lastName" />
+        </div>
+
+        <div class="input-wrapper"><label for="email">Email</label>
+        <input type="text" id="emial" name="userName" />
+        </div>
+
+        <div class="input-wrapper"><label for="password">Password</label>
+        <input type="text" id="password" name="password" />
+        </div>
+        <div class="input-wrapper"><label for="confirm-password">confirmPassword</label>
+        <input type="text" id="confirm-password" name="confirm-password" />
+        </div>
+        
+        <div class="input-wrapper"><label for="admin">is Admin ?</label>
+        <input type="checkbox" id="admin" name="admin" />
+        </div>
+
+        <% if(errors){ errors.map(err=>{ %>   
+            <span class="error"><%= err.path %> : <%= err.msg %></span>
+            <% })} %>
+
+        <div class="form-buttons"><button type="button" onclick="window.location.href='/'">Back</button>
+        <button type="submit">Submit</button>
+    </div>
+
+    </form>
+</div>
+</body>
+</html>

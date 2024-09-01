@@ -1,0 +1,45 @@
+header {
+    justify-self: stretch;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: sticky;
+    top: 0;
+    background: #fff;
+
+    a,button {
+        padding: 0.3rem;
+        background-color: bisque;
+        border-radius: 0.5rem;
+        cursor: pointer;
+    }
+}
+.blogs {
+    width: 50vw;
+    min-width: 300px;
+    margin-inline: auto;
+    display: grid;
+    grid-auto-rows: 300px;
+    gap: 1rem;
+
+    > li {
+        min-height: 300px;
+    border: 1px dotted orange;
+    border-radius: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1rem;
+
+    > p {
+        flex: 1;
+    }
+    }
+}
+
+.meta {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: end;
+}
