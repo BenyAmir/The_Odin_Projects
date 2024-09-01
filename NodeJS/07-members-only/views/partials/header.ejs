@@ -1,0 +1,31 @@
+<header>
+  <h1><%= title %></h1>
+  <div>
+    <% if(locals.user) { %>
+        <% if(!locals.user.membership) { %>
+            <a href="/join">Join The Club</a>
+            <% } %>
+            <a href="/blog/add">Create a new Message!</a>
+            <button onclick="handleLogout()">logout</button>
+    <% } else { %>
+    <p>
+      <strong><a href="/auth/login">Login</a></strong> or
+      <strong><a href="/auth/signup">Register</a></strong> here.
+    </p>
+    <% } %>
+  </div>
+</header>
+
+<script>
+    async function handleLogout(){
+        const response = await fetch('/auth/logout',{
+        method:'post'
+        });
+
+        const result = await response.json();
+
+        if(response.ok) {
+            window.location.href = result.redirect
+        }
+}
+</script>

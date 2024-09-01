@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Club House</title>
+    <link rel="stylesheet" type="text/css" href="/global.css" />
+    <link rel="stylesheet" type="text/css" href="/blog.css" />
+  </head>
+  <body>
+    <%- include('./partials/header.ejs',{title}) %>
+    <main>
+      <ul class="blogs">
+        <% if (posts) { posts.map(post => { %>
+        <li>
+          <div>
+            <h3><%= post.title %></h3>
+            <% if(locals.user?.membership || locals.user?.admin){ %>
+            <div class="meta">
+              <time
+                datetime="<%= new Date(post.created).toLocaleDateString('en-US') %>"
+                ><%= new Date(post.created).toLocaleDateString('en-US') %></time
+              >
+              <span><%= post.firstname %> <%= post.lastname %></span>
+              <% } %>
+            </div>
+          </div>
+          <p><%= post.body %></p>
+          <% if(locals.user?.admin){ %>
+
+            <button
+            data-id="<%= post.id %>"
+            onclick="handlePostDelete(this.dataset.id)"
+            >
+            <img src="/trash.svg" />
+          </button>
+        <% } %>
+        </li>
+        <% }) %> <% } %>
+      </ul>
+    </main>
+  </body>
+  <script>
+    async function handlePostDelete(id) {
+      const response = await fetch(
+        "/blog/delete?" + new URLSearchParams({ id }).toString(),
+        { method: "post" }
+      );
+      const result = await response.json();
+      if(response.ok){
+        window.location.href = result.redirect
+      }
+    }
+  </script>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Blog</title>
+    <link rel="stylesheet" type="text/css" href="/global.css"/>
+</head>
+<body>
+    <h1>Add new Blog</h1>
+    <div class="form-container">
+    <form action="/blog/add" method="post">
+        <div class="input-wrapper">
+            <label for="title">title</label>
+            <input type="text" id="title" name="title" />
+            </div>
+    
+            <div class="input-wrapper">
+                <label for="body">body</label>
+            <textarea id="body" name="body"></textarea>
+            </div>
+    
+            <% if(errors){ errors.map(err=>{ %>   
+                <span class="error"><%= err.path %> : <%= err.msg %></span>
+                <% })} %>
+    
+            <div class="form-buttons"><button type="button" onclick="window.location.href='/'">Back</button>
+            <button type="submit">Submit</button>
+    </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Club</title>
+    <link rel="stylesheet" type="text/css" href="/global.css"/>
+</head>
+<body>
+    <h1>Join the Amazing Club</h1>
+    <div class="form-container">
+    <form action="/join" method="post">
+        <div class="input-wrapper">
+            <label for="secret">secret passCode</label>
+            <input type="text" id="secret" name="secret" />
+            </div>
+    
+            <% if(errors){ errors.map(err=>{ %>   
+                <span class="error"><%= err.path %> : <%= err.msg %></span>
+                <% })} %>
+    
+            <div class="form-buttons"><button type="button" onclick="window.location.href='/'">Back</button>
+            <button type="submit">Submit</button>
+    </form>
+    </div>
+</body>
+</html>
