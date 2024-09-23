@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clouding File Management</title>
+    <link rel="stylesheet" type="text/css" href="styles/main.css"/>
+</head>
+<body>
+    <main>
+        <div class="card">
+            <section id="login" class="fade-in">
+                <form class="form" action="/auth/login" method="post">
+                    <% if(locals.errors && locals.authRequest == 'login'){ locals.errors.map(err=>{ %>   
+                        <span class="error"><%= err %></span>
+                        <% })} %>
+                    <div class="input">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" placeholder="username"/>
+                    </div>
+                    <div class="input">
+                        <label for="password">Password</label>
+                        <input type="text" id="password" name="password" placeholder="password"/>
+                    </div>
+                    <button type="submit" class="primary">Login</button>
+                </form>
+                <a class="action" onclick="requestRegister(event)">Register</a>
+            </section>
+            <section id="register" class="fade-out ">
+                <form class="form" action="/auth/register" method="post">
+                <% if(locals.errors && locals.authRequest == 'register'){ locals.errors.map(err=>{ %>   
+                    <span class="error"><%= err %></span>
+                    <% })} %>
+                <div class="input">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="username"/>
+                </div>
+                <div class="input">
+                    <label for="password">Password</label>
+                    <input type="text" id="password" name="password" placeholder="password"/>
+                </div>
+                <div class="input">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="text" id="confirm-password" name="confirm-password" placeholder="confirm password"/>
+                </div>
+                <button type="submit" class="primary">Register</button>
+            </form>
+            <a class="action" onclick="requestLogin(event)">Login</a>
+        </section>
+        </div>
+    </main>
+</body>
+
+<script>
+    const registerSection = document.getElementById('register');
+    const loginSection = document.getElementById('login');
+    function requestLogin(e){
+        e.preventDefault();
+        loginSection.classList.replace('fade-out','fade-in');
+        registerSection.classList.replace('fade-in','fade-out');
+    }
+    function requestRegister(e){
+        e.preventDefault();
+        registerSection.classList.replace('fade-out','fade-in');
+        loginSection.classList.replace('fade-in','fade-out');
+    }
+</script>
+</html>

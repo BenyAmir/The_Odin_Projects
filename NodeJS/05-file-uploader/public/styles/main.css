@@ -1,0 +1,30 @@
+@layer reset,component,defaults,global;
+
+@import url('./reset.css') layer(reset);
+@import url('./card.css') layer(component.card);
+@import url('./form.css') layer(component.form);
+@import url('./input.css') layer(component.input);
+@import url('./global.css') layer(global);
+
+
+@layer defaults{
+
+    body {
+        height: 100dvh;
+    }
+    main{
+        height: 100%;
+        display: grid;
+        place-content: center;
+    }
+    
+    .card section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        position: absolute;
+        inset: 0;
+    }
+}

@@ -1,0 +1,52 @@
+:where(.input) {
+  display: grid;
+  place-content: start;
+  gap: 0.5rem;
+  position: relative;
+
+  > label {
+    font-size: 1rem;
+    color: cadetblue;
+    position: absolute;
+    top: 0;
+    left: 0.7rem;
+    translate: 0 -50%;
+    transition: translate 1s ease,opacity 1s ease;
+    background-color: #fff;
+    padding: 0 0.3rem;
+    line-height: 1;
+    opacity: 1;
+    user-select: none;
+  }
+
+  > input {
+    height: 2rem;
+    padding: 0;
+    padding-inline: 1rem;
+    border: 1px solid cadetblue;
+    border-radius: 1rem;
+
+    &:focus-within{
+      outline: none;
+    }
+  }
+}
+
+:where(.input:has(input:placeholder-shown)){
+  > label {
+    translate: 0 0;
+    opacity: 0;
+  }
+}
+
+:where(
+    .input:focus-within,
+    .input:has(input:autofill),
+    .input:has(input:focus)
+  )
+  > label {
+    translate: 0 -50%;
+    opacity: 1;
+}
+
+
