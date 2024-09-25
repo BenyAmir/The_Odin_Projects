@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clouding File Management - Panel</title>
+    <link rel="stylesheet" type="text/css" href="/styles/panel.css" />
+</head>
+<body>
+    <header>
+        <h4>
+            hello <%= locals.user.username %>
+        </h4>
+    </header>
+    <main>
+        <section class="card">
+            <div class="text-center">
+                <p class="message">the file has been uploaded successfully</p>
+                <button class="action" type="button" onclick="window.location.href = '/panel'">back</button>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

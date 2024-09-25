@@ -16,12 +16,38 @@ datasource db {
 model Session {
   id        String   @id
   sid       String   @unique
-  data      String   
-  expiresAt   DateTime
+  data      String
+  expiresAt DateTime
 }
 
 model User {
-  id Int @id @default(autoincrement())
+  id       Int    @id @default(autoincrement())
   username String @unique
   password String
 }
+
+model File {
+  id String @id @default(uuid())
+  name String
+  folder Folder @relation(fields: [folderID],references: [id])
+  folderID String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Folder{
+  id String @id @default(uuid())
+  name String
+  parent_id String? 
+  files File[]
+
+}
+// model Folder{
+//   id String @id @default(uuid())
+//   name String
+//   parent Folder? @relation("ParentChild", fields: [parentID],references: [id])
+//   parentID String? 
+//   children Folder[] @relation("ParentChild")
+//   files File[]
+
+// }

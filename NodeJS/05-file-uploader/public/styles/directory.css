@@ -1,0 +1,24 @@
+:where(.directory) {
+    min-height: 100px;
+    background-color: gainsboro;
+    max-width: 60%;
+    min-width: 300px;
+    margin-bottom: 2rem;
+
+    ul {
+        list-style-image: url('../images/folder.png');
+    }
+
+    li {
+        cursor: pointer;
+    }
+
+    li > span {
+        position: relative;
+        bottom: 0.2rem;
+    }
+
+    .root {
+        list-style-image: url('../images/hand-gesture.png');
+    }
+}

@@ -4,8 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clouding File Management - Panel</title>
+    <link rel="stylesheet" type="text/css" href="styles/panel.css" />
 </head>
 <body>
-    hello <%= locals.user.username %>
+    <header>
+        <h4>
+            hello <%= locals.user.username %>
+        </h4>
+    </header>
+    <main>
+        <section class="card">
+            <% if(locals.errors) { %>
+            <div class="text-center">
+                <p class="message"><%= locals.errors %></p>
+            </div>
+            <% } %>
+            <div class="directory">
+            <ul>
+                <% if(parent_id) { %>
+                    <li class="root" onclick="goOneLevelUp()">...</li>
+                <% } %>
+                    <% if(directory && Array.isArray(directory)){ %>
+                    <% directory.map(child => { %>
+                        <li class="folder"><span onclick="fetchFolder('<%= child.id %>')"><%= child.name %></span></li>
+                    <% }) %>
+                <% } %>
+                <li class="create" onclick="showCreateFolder()">
+                    <span>Create new folder</span>
+                    <form id="create-folder" class="hidden" action="/panel/folder/create" method="post"> 
+                        <input name="name" type="text" placeholder="folder name"/>
+                        <input name="parent_id" type="hidden" value="<%= parent_id %>"/>
+                        <button type="submit">create</button>
+                    </form>
+                </li>
+                </ul>
+            </div>
+            <form class="form" action="/panel/file/upload" method="post" enctype="multipart/form-data">
+                <div class="input">
+                    <label for="file">Select Your File From here</label>
+                    <input id="file" name="file" type="file"/>
+                </div>
+
+                <button type="submit" class="primary">Upload</button>
+            </form>
+        </section>
+    </main>
 </body>
+<script>
+    function fetchFolder(id){
+        window.location.href = `/panel?parent_id=${id}`
+    }
+
+    function showCreateFolder(){
+        document.getElementById('create-folder').classList.remove('hidden')
+    }
+
+    function goOneLevelUp(){
+        const url = new URL(window.location.href);
+        url.pathname+= '/up'
+        window.location.href = url
+        // const searchParams = new URLSearchParams(window.location.search);
+        // if(!searchParams.has('up')) searchParams.append('up',true);
+        // window.location.search = searchParams.toString()
+    }
+</script>
 </html>

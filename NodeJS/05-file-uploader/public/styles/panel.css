@@ -1,0 +1,18 @@
+@layer reset,global,components;
+
+
+@import url('./global.css') layer(global);
+@import url('./card.css') layer(components.card);
+@import url('./form.css') layer(components.form);
+@import url('./input.css') layer(components.input);
+@import url('./directory.css') layer(components.directory);
+
+
+body {
+    height: 100dvh;
+}
+main{
+    height: 100%;
+    display: grid;
+    place-content: center;
+}
