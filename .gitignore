@@ -1,3 +1,4 @@
 **/node_modules/
 .vscode
 **/.env/
+NodeJS/05-file-uploader/uploads/**

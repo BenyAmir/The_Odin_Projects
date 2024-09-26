@@ -43,6 +43,7 @@ app.use(
     res.locals.errors = req.session.messages;
     delete req.session.messages;
     res.locals.user = req.user;
+    res.locals.success = res.statusCode.toString().startsWith('2') ? true : false
     next();
   })
 

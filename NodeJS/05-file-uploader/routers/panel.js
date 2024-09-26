@@ -20,8 +20,8 @@ router.get("/", async (req, res, next) => {
 router.post("/folder/create", folderController.createFolder);
 
 router.post("/file/upload", upload.single("file"), fileController.uploadFile);
-router.get("/file/upload", (req, res, next) => {
-  res.render("upload");
-});
+// router.get("/file/upload", (req, res, next) => {
+//   res.render("upload");
+// });
 
 module.exports = router;

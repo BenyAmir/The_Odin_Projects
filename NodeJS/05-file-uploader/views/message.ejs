@@ -15,8 +15,8 @@
     <main>
         <section class="card">
             <div class="text-center">
-                <p class="message">the file has been uploaded successfully</p>
-                <button class="action" type="button" onclick="window.location.href = '/panel'">back</button>
+                <p class="message <%= locals.success ? 'fail' : 'success' %>"><%= message %></p>
+                <button class="action" type="button" onclick="window.history.back()">back</button>
             </div>
         </section>
     </main>
