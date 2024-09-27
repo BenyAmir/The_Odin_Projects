@@ -11,17 +11,8 @@ router.get('/:up', async(req,res,next) =>{
   res.redirect("/panel?" + searchParams.toString());
 });
 
-router.get("/", async (req, res, next) => {
-  const { parent_id} = req.query;
-  const directory = await folderController.getDirectory(req,res)
-  res.render("panel", { directory, parent_id });
-});
-
+router.get("/", folderController.getDirectory);
 router.post("/folder/create", folderController.createFolder);
-
 router.post("/file/upload", upload.single("file"), fileController.uploadFile);
-// router.get("/file/upload", (req, res, next) => {
-//   res.render("upload");
-// });
 
 module.exports = router;

@@ -8,9 +8,11 @@ exports.uploadFile = async (req, res) => {
 
   try {
     const { filename } = req.file;
+    const {parent_id} = req.body;
      await prisma.file.create({
       data: {
         name: filename,
+        folder_id: parent_id || null
       },
     });
 

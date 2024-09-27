@@ -1,21 +1,31 @@
 :where(.directory) {
-    min-height: 100px;
-    background-color: gainsboro;
-    max-width: 60%;
-    min-width: 300px;
-    margin-bottom: 2rem;
-
+    width: 100%;
+    height: 100%;
+    padding: 2rem;
+    
     ul {
-        list-style-image: url('../images/folder.png');
+        min-height: 100px;
+        list-style:none;
+        display: grid;
+        grid-template-rows: 1rem;
+        gap: 1rem;
     }
-
+    
     li {
         cursor: pointer;
     }
-
+    
     li > span {
         position: relative;
         bottom: 0.2rem;
+    }
+
+    .folder {
+        list-style-image: url('../images/folder.png');
+    }
+
+    .file {
+        list-style-image: url('../images/file.png');
     }
 
     .root {

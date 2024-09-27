@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["relationJoins"]
 }
 
 datasource db {
@@ -29,8 +30,8 @@ model User {
 model File {
   id String @id @default(uuid())
   name String
-  folder Folder @relation(fields: [folderID],references: [id])
-  folderID String
+  folder Folder? @relation(fields: [folder_id],references: [id])
+  folder_id String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -38,16 +39,8 @@ model File {
 model Folder{
   id String @id @default(uuid())
   name String
-  parent_id String? 
   files File[]
-
+  parent Folder? @relation("parentChild",fields: [parent_id],references: [id])
+  parent_id String?
+  children Folder[] @relation("parentChild")
 }
-// model Folder{
-//   id String @id @default(uuid())
-//   name String
-//   parent Folder? @relation("ParentChild", fields: [parentID],references: [id])
-//   parentID String? 
-//   children Folder[] @relation("ParentChild")
-//   files File[]
-
-// }

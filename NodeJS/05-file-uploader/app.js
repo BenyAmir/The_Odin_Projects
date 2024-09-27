@@ -1,5 +1,5 @@
+require('dotenv').config();
 const {join} = require('node:path');
-const fs = require('node:fs');
 const express = require('express');
 const expressSession = require('express-session');
 const passport = require('passport');
@@ -7,7 +7,6 @@ const { PrismaClient } = require('@prisma/client');
 const { PrismaSessionStore } = require('@quixo3/prisma-session-store');
 const authRouter = require('./routers/auth.js');
 const panelRouter = require('./routers/panel.js');
-const multer = require('multer');
 require("./config/passport");
 
 const app = express();

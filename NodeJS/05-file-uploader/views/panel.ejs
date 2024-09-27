@@ -1,71 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Clouding File Management - Panel</title>
     <link rel="stylesheet" type="text/css" href="styles/panel.css" />
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h4>
-            hello <%= locals.user.username %>
-        </h4>
+      <h4>hello <%= locals.user.username %></h4>
     </header>
     <main>
-        <section class="card">
-            <% if(locals.errors) { %>
-            <div class="text-center">
-                <p class="message"><%= locals.errors %></p>
+      <section class="card">
+        <% if(locals.errors) { %>
+        <div class="text-center">
+          <p class="message"><%= locals.errors %></p>
+        </div>
+        <% } %>
+        <div class="directory">
+          <ul>
+            <% if(directory){ %> <% if(directory.parent_id) { %>
+            <li class="root" onclick="goOneLevelUp()">...</li>
+            <% } %> <% directory.children.map(child => { %>
+            <li class="folder">
+              <span onclick="fetchFolder('<%= child.id %>')"
+                ><%= child.name %></span
+              >
+            </li>
+            <% }) %> <% directory.files.map(file => { %>
+            <li class="file"><span><%= file.name %></span></li>
+            <% }) %> <% } %>
+            <li id="form-trigger" class="create">
+              <span onclick="showCreateFolder(event)">Create new folder</span>
+              <strong><span>OR</span></strong>
+              <span onclick="showUploadFile(event)">Upload File</span>
+            </li>
+          </ul>
+          <form
+            id="create-folder"
+            class="form hidden"
+            action="/panel/folder/create"
+            method="post"
+          >
+            <div class="input">
+              <label for="folder">Folder name</label>
+              <input id="folder" name="name" type="text" placeholder="folder name" />
             </div>
-            <% } %>
-            <div class="directory">
-            <ul>
-                <% if(parent_id) { %>
-                    <li class="root" onclick="goOneLevelUp()">...</li>
-                <% } %>
-                    <% if(directory && Array.isArray(directory)){ %>
-                    <% directory.map(child => { %>
-                        <li class="folder"><span onclick="fetchFolder('<%= child.id %>')"><%= child.name %></span></li>
-                    <% }) %>
-                <% } %>
-                <li class="create" onclick="showCreateFolder()">
-                    <span>Create new folder</span>
-                    <form id="create-folder" class="hidden" action="/panel/folder/create" method="post"> 
-                        <input name="name" type="text" placeholder="folder name"/>
-                        <input name="parent_id" type="hidden" value="<%= parent_id %>"/>
-                        <button type="submit">create</button>
-                    </form>
-                </li>
-                </ul>
+            <input name="parent_id" type="hidden" value="<%= directory.id %>"/>
+            <button type="submit">create</button>
+            <button type="button" onclick="cancelForm(event)">cancel</button>
+          </form>
+          <form
+            onclick="console.log('clicked')"
+            class="form hidden"
+            id="upload-file"
+            action="/panel/file/upload"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <div class="input">
+              <label for="file">Select Your File From here</label>
+              <input name="parent_id" type="hidden" value="<%= directory.id %>"/>
+              <input id="file" name="file" type="file" />
             </div>
-            <form class="form" action="/panel/file/upload" method="post" enctype="multipart/form-data">
-                <div class="input">
-                    <label for="file">Select Your File From here</label>
-                    <input id="file" name="file" type="file"/>
-                </div>
 
-                <button type="submit" class="primary">Upload</button>
-            </form>
-        </section>
+            <button type="submit" class="primary">Upload</button>
+            <button type="button" onclick="cancelForm(event)">cancel</button>
+          </form>
+        </div>
+      </section>
     </main>
-</body>
-<script>
-    function fetchFolder(id){
-        window.location.href = `/panel?parent_id=${id}`
+  </body>
+  <script>
+    function fetchFolder(id) {
+      window.location.href = `/panel?parent_id=${id}`;
     }
 
-    function showCreateFolder(){
-        document.getElementById('create-folder').classList.remove('hidden')
+    function showCreateFolder() {
+      document.getElementById("form-trigger").classList.add("hidden");
+      document.getElementById("create-folder").classList.remove("hidden");
     }
 
-    function goOneLevelUp(){
-        const url = new URL(window.location.href);
-        url.pathname+= '/up'
-        window.location.href = url
-        // const searchParams = new URLSearchParams(window.location.search);
-        // if(!searchParams.has('up')) searchParams.append('up',true);
-        // window.location.search = searchParams.toString()
+    function showUploadFile() {
+      document.getElementById("form-trigger").classList.add("hidden");
+      document.getElementById("upload-file").classList.remove("hidden");
     }
-</script>
+
+    function cancelForm(event) {
+      event.preventDefault();
+      document.getElementById("form-trigger").classList.remove("hidden");
+      document.getElementById("upload-file").classList.add("hidden");
+      document.getElementById("create-folder").classList.add("hidden");
+    }
+
+    function goOneLevelUp() {
+      const url = new URL(window.location.href);
+      url.pathname += "/up";
+      window.location.href = url;
+    }
+
+    // window.addEventListener("DOMContentLoaded", (ev) => {
+    //   const searchParams = new URLSearchParams(window.location.search);
+    //   const parent_id = searchParams.get("parent_id");
+
+    //   document
+    //     .querySelectorAll("input[type=hidden][name=parent_id]")
+    //     .forEach((input) => {
+    //       input.value = parent_id;
+    //     });
+    // });
+  </script>
 </html>

@@ -57,6 +57,14 @@ exports.signup = [
         username:req.body.username,
         password:hashedPass,
       }});
+
+      // create root folder for user directory
+      await prisma.folder.create({
+        data:{
+          name: process.env.DIRECTORY_ROOT_FOLDER
+        }
+      })
+
       res.redirect("/");
     });
   }),
