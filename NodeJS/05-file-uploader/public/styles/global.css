@@ -1,51 +1,45 @@
-.hidden{
-    display: none;
+
+.fade-in {
+  animation: fade-in 1.5s ease-in forwards;
+}
+.fade-out {
+  animation: fade-out 1s ease forwards;
 }
 
-.visible{
-    visibility: hidden;
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fade-out {
+  to {
+    translate: -100% 0;
+  }
 }
 
-.not-visible {
-    visibility: initial;
-}
-
-.block {
-    display: block;
-}
 
 
-.fade-in{
-    animation:fade-in 1.5s ease-in forwards ;
-}
-.fade-out{
-    animation:fade-out 1s ease forwards;
-}
-
-@keyframes fade-in{
-    from{
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-@keyframes fade-out{
-    to {
-        translate: -100% 0;
-    }
+.message {
+  &.fail {
+    color: red;
+  }
+  &.success {
+    color: green;
+  }
 }
 
-.text-center{
-    text-align: center;
+.icon {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+}
+.trash {
+  background: url(../images/trash-can.png) no-repeat;
 }
 
-.message{
-
-    &.fail {
-        color:red
-    }
-    &.success {
-        color: green;
-    }
-    }
+.edit {
+  background: url(../images/pen.png) no-repeat;
+}

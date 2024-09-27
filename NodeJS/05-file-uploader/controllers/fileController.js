@@ -7,11 +7,12 @@ exports.uploadFile = async (req, res) => {
   }
 
   try {
-    const { filename } = req.file;
+    const { filename,originalname } = req.file;
     const {parent_id} = req.body;
+    const name = Buffer.from(originalname, 'latin1').toString('utf8');
      await prisma.file.create({
       data: {
-        name: filename,
+        name,
         folder_id: parent_id || null
       },
     });

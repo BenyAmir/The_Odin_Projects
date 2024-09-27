@@ -1,7 +1,8 @@
-@layer reset,components,global;
+@layer reset,global,components,utilities;
 
 
 @import url('./global.css') layer(global);
+@import url('./utilities.css') layer(utilities);
 @import url('./card.css') layer(components.card);
 @import url('./form.css') layer(components.form);
 @import url('./input.css') layer(components.input);

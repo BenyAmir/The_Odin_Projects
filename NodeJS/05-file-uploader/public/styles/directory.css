@@ -5,7 +5,7 @@
     
     ul {
         min-height: 100px;
-        list-style:none;
+        /* list-style:none; */
         display: grid;
         grid-template-rows: 1rem;
         gap: 1rem;
@@ -13,11 +13,20 @@
     
     li {
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
     }
     
     li > span {
         position: relative;
         bottom: 0.2rem;
+    }
+
+    .editing .edit,
+    .editing .trash,
+    .editing .title {
+        display: none;
     }
 
     .folder {

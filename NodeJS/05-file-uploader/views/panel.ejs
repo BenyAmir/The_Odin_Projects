@@ -20,12 +20,24 @@
         <div class="directory">
           <ul>
             <% if(directory){ %> <% if(directory.parent_id) { %>
-            <li class="root" onclick="goOneLevelUp()">...</li>
+            <li
+              class="root"
+              data-id="<%= directory.parent_id %>"
+              onclick="goOneLevelUp(event)"
+            >
+              ...
+            </li>
             <% } %> <% directory.children.map(child => { %>
-            <li class="folder">
-              <span onclick="fetchFolder('<%= child.id %>')"
-                ><%= child.name %></span
-              >
+            <li class="folder" data-id="<%= child.id %>">
+              <span class="title" onclick="fetchFolder(event)"><%= child.name %></span>
+              <span onclick="editFolder(event)"><i class="icon edit"></i>
+              <form id="update-folder" class="hidden" action="/panel/folder/<%= child.id %>/update" method="post">
+                <input type="text" value="<%= child.name %>" name="name"/><button type="submit">save</button>
+              </form>
+              </span>
+              <span onclick="deleteFolder(event)"
+                ><i class="icon trash"></i
+              ></span>
             </li>
             <% }) %> <% directory.files.map(file => { %>
             <li class="file"><span><%= file.name %></span></li>
@@ -44,9 +56,14 @@
           >
             <div class="input">
               <label for="folder">Folder name</label>
-              <input id="folder" name="name" type="text" placeholder="folder name" />
+              <input
+                id="folder"
+                name="name"
+                type="text"
+                placeholder="folder name"
+              />
             </div>
-            <input name="parent_id" type="hidden" value="<%= directory.id %>"/>
+            <input name="parent_id" type="hidden" value="<%= directory.id %>" />
             <button type="submit">create</button>
             <button type="button" onclick="cancelForm(event)">cancel</button>
           </form>
@@ -60,7 +77,11 @@
           >
             <div class="input">
               <label for="file">Select Your File From here</label>
-              <input name="parent_id" type="hidden" value="<%= directory.id %>"/>
+              <input
+                name="parent_id"
+                type="hidden"
+                value="<%= directory.id %>"
+              />
               <input id="file" name="file" type="file" />
             </div>
 
@@ -72,8 +93,24 @@
     </main>
   </body>
   <script>
-    function fetchFolder(id) {
+    function goOneLevelUp(event) {
+      const id = event.currentTarget.dataset.id;
       window.location.href = `/panel?parent_id=${id}`;
+    }
+
+    function fetchFolder(event) {
+      const id = event.currentTarget.parentElement.dataset.id;
+      window.location.href = `/panel?parent_id=${id}`;
+    }
+
+    function editFolder(event){
+      event.currentTarget.parentElement.classList.add('editing')
+      document.getElementById('update-folder').classList.remove('hidden')
+    }
+
+    function deleteFolder(event) {
+      const id = event.currentTarget.parentElement.dataset.id;
+      window.location.href = `/panel/folder/${id}/delete`;
     }
 
     function showCreateFolder() {
@@ -92,22 +129,5 @@
       document.getElementById("upload-file").classList.add("hidden");
       document.getElementById("create-folder").classList.add("hidden");
     }
-
-    function goOneLevelUp() {
-      const url = new URL(window.location.href);
-      url.pathname += "/up";
-      window.location.href = url;
-    }
-
-    // window.addEventListener("DOMContentLoaded", (ev) => {
-    //   const searchParams = new URLSearchParams(window.location.search);
-    //   const parent_id = searchParams.get("parent_id");
-
-    //   document
-    //     .querySelectorAll("input[type=hidden][name=parent_id]")
-    //     .forEach((input) => {
-    //       input.value = parent_id;
-    //     });
-    // });
   </script>
 </html>

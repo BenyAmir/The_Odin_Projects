@@ -1,0 +1,19 @@
+.hidden {
+    display: none;
+  }
+  
+  .visible {
+    visibility: hidden;
+  }
+  
+  .not-visible {
+    visibility: initial;
+  }
+  
+  .block {
+    display: block;
+  }
+
+  .text-center {
+    text-align: center;
+  }

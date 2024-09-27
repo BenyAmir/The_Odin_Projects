@@ -28,15 +28,6 @@ exports.getDirectory = async (req, res) => {
 
   res.render("panel", { directory });
 };
-exports.getFolder = async (req, res) => {
-  const { parent_id } = req.query;
-
-  return await prisma.folder.findUnique({
-    where: {
-      id: parent_id,
-    },
-  });
-};
 
 exports.createFolder = async (req, res) => {
   try {
@@ -45,7 +36,7 @@ exports.createFolder = async (req, res) => {
     await prisma.folder.create({
       data: {
         name,
-        parent_id: parent_id,
+        parent_id,
       },
     });
     res.redirect("/panel");
@@ -54,34 +45,45 @@ exports.createFolder = async (req, res) => {
   } 
 };
 
-exports.backToParentDirectory = async (req, res) => {
-  const { parent_id: id } = req.params;
-  const folder = prisma.folder.findUnique({
-    where: {
-      id: id,
-    },
-  });
-
-  const upLevelParentId = folder.parent_id;
-  return await prisma.folder.findUnique({
-    where: {
-      parent_id: upLevelParentId,
-    },
-  });
-};
-
 exports.deleteFolder = async (req, res) => {
   try {
     const { id } = req.params;
+    const folder = await prisma.folder.findFirst({
+      where: {
+        id,
+      },
+    });
+
     await prisma.folder.delete({
       where: {
         id,
       },
     });
+    res.redirect(`/panel?parent_id=${folder.parent_id}`);
   } catch (error) {
-    res.locals.error = error;
-    res.redirect(req.path);
+    res.status(400).render('message'.error.message);
   }
 };
 
-exports.updateFolder = async (req, res) => {};
+exports.updateFolder = async (req, res) => {
+  try {
+    const {id} = req.params;
+    const {name} = req.body;
+    const folder = await prisma.folder.findFirst({
+      where: {
+        id,
+      },
+    });
+    await prisma.folder.update({
+      where:{
+        id
+      },
+      data:{
+        name
+      }
+    });
+    res.redirect(`/panel?parent_id=${folder.parent_id}`);
+  } catch (error) {
+    res.status(400).render('message'.error.message);
+  }
+};
