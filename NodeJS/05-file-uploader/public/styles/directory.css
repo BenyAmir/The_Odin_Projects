@@ -12,7 +12,6 @@
     }
     
     li {
-        cursor: pointer;
         display: flex;
         align-items: center;
         gap: 0.5rem;
@@ -21,6 +20,10 @@
     li > span {
         position: relative;
         bottom: 0.2rem;
+    }
+
+    :is(li.root,li > span[onclick]) {
+        cursor: pointer;
     }
 
     .editing .edit,

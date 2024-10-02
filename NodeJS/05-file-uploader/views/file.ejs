@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clouding File Management - Panel</title>
+    <link rel="stylesheet" type="text/css" href="/styles/panel.css" />
+</head>
+<body>
+    <header>
+        <h4>
+            hello <%= locals.user.username %>
+        </h4>
+    </header>
+    <main>
+        <section class="card">
+            <% if(file) { %>
+                <div class="text-center">
+                        <div>
+                            <strong>Name</strong>
+                            <span><%= file.name %></span>
+                        </div>
+                        <div>
+                            <strong>Created at</strong>
+                            <span><%= new Date(file.createdAt).toLocaleString() %></span>
+                        </div>
+                        <div>
+                            <strong>Updated at</strong>
+                            <span><%= new Date(file.updatedAt).toLocaleString() %></span>
+                        </div>
+
+                        <button type="button" class="action" data-id="<%= file.id %>" onclick="download(event)">download</button>
+                </div>
+            <% } %>
+        </section>
+    </main>
+</body>
+<script>
+    function download(event){
+        const id = event.currentTarget.dataset.id;
+        return window.location.href = `/panel/file/${id}/download`
+    }
+</script>
+</html>

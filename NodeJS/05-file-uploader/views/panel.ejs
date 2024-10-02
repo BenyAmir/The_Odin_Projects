@@ -39,9 +39,21 @@
                 ><i class="icon trash"></i
               ></span>
             </li>
-            <% }) %> <% directory.files.map(file => { %>
-            <li class="file"><span><%= file.name %></span></li>
-            <% }) %> <% } %>
+            <% }) %>
+             <% directory.files.map(file => { %>
+            <li class="file" data-folder-id="<%= directory.id %>" data-id="<%= file.id %>">
+              <span class="title"><a href="/panel/folder/<%= directory.id %>/file/<%= file.id %>"><%= file.name %></a></span>
+              <span onclick="editFile(event)"><i class="icon edit"></i>
+              <form id="update-file" class="hidden" action="/panel/folder/<%= directory.id %>/file/<%= file.id %>/update" method="post">
+                <input type="text" value="<%= file.name %>" name="name"/><button type="submit">save</button>
+              </form>
+              </span>
+              <span onclick="deleteFile(event)"
+                ><i class="icon trash"></i
+              ></span>
+            </li>
+            <% }) %>
+             <% } %>
             <li id="form-trigger" class="create">
               <span onclick="showCreateFolder(event)">Create new folder</span>
               <strong><span>OR</span></strong>
@@ -71,17 +83,12 @@
             onclick="console.log('clicked')"
             class="form hidden"
             id="upload-file"
-            action="/panel/file/upload"
+            action="/panel/folder/<%= directory.id %>/file/upload"
             method="post"
             enctype="multipart/form-data"
           >
             <div class="input">
               <label for="file">Select Your File From here</label>
-              <input
-                name="parent_id"
-                type="hidden"
-                value="<%= directory.id %>"
-              />
               <input id="file" name="file" type="file" />
             </div>
 
@@ -128,6 +135,16 @@
       document.getElementById("form-trigger").classList.remove("hidden");
       document.getElementById("upload-file").classList.add("hidden");
       document.getElementById("create-folder").classList.add("hidden");
+    }
+
+    function editFile(event){
+      event.currentTarget.parentElement.classList.add('editing')
+      document.getElementById('update-file').classList.remove('hidden')
+    }
+
+    function deleteFile(event) {
+      const {id,folderId} = event.currentTarget.parentElement.dataset;
+      window.location.href = `/panel/folder/${folderId}/file/${id}/delete`;
     }
   </script>
 </html>
