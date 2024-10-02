@@ -42,10 +42,10 @@
             <% }) %>
              <% directory.files.map(file => { %>
             <li class="file" data-folder-id="<%= directory.id %>" data-id="<%= file.id %>">
-              <span class="title"><a href="/panel/folder/<%= directory.id %>/file/<%= file.id %>"><%= file.name %></a></span>
+              <span class="title"><a href="/panel/folder/<%= directory.id %>/file/<%= file.id %>"><%= file.displayName %></a></span>
               <span onclick="editFile(event)"><i class="icon edit"></i>
               <form id="update-file" class="hidden" action="/panel/folder/<%= directory.id %>/file/<%= file.id %>/update" method="post">
-                <input type="text" value="<%= file.name %>" name="name"/><button type="submit">save</button>
+                <input type="text" value="<%= file.displayName %>" name="name"/><button type="submit">save</button>
               </form>
               </span>
               <span onclick="deleteFile(event)"

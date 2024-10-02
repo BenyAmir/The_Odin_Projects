@@ -1,5 +1,6 @@
 const prisma = require("../prisma/client");
 const multer = require('multer');
+const cloudinary = require('cloudinary').v2;
 const folderController = require('./folderController');
 const fs = require('node:fs');
 
@@ -18,7 +19,8 @@ exports.uploadFile = async (req, res) => {
     const name = Buffer.from(originalname, 'latin1').toString('utf8');
      await prisma.file.create({
       data: {
-        name,
+        displayName:name,
+        name:filename,
         folder_id: directoryId,
         path
       },
@@ -40,12 +42,16 @@ exports.deleteFile = async(req,res) => {
       const root = await folderController.getRoot();
       directoryId = root.id;
     }
-    await prisma.file.delete({
+    const file = await prisma.file.delete({
       where:{
         id:fileID,
         folder_id:directoryId
       }
     })
+    await cloudinary.uploader.destroy(file.name, function(error,result) {
+      console.log(result, error);
+      if(error) throw error
+    }) 
 
     res.redirect(`/panel?parent_id=${directoryId}`);
   } catch (error) {

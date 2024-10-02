@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const upload = require("../middlewares/upload");
+const uploader = require("../middlewares/cloudinary");
 const fileController = require("../controllers/fileController");
 const folderController = require("../controllers/folderController");
 
