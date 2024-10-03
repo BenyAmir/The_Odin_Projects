@@ -1,6 +1,7 @@
 @layer reset,global,components,utilities;
 
 
+@import url('./reset.css') layer(reset);
 @import url('./global.css') layer(global);
 @import url('./utilities.css') layer(utilities);
 @import url('./card.css') layer(components.card);
@@ -16,4 +17,15 @@ main{
     height: 100%;
     display: grid;
     place-content: center;
+}
+
+header{
+    height: 50px;
+    border-bottom: 1px solid #ccc;
+    background-color: beige;
+    box-shadow: inset 0px -1px 3px #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }

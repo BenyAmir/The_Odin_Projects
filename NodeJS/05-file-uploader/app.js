@@ -7,6 +7,7 @@ const { PrismaClient } = require('@prisma/client');
 const { PrismaSessionStore } = require('@quixo3/prisma-session-store');
 const authRouter = require('./routers/auth.js');
 const panelRouter = require('./routers/panel.js');
+const shareRouter = require('./routers/share.js');
 require("./config/passport");
 
 const app = express();
@@ -51,6 +52,8 @@ app.use(
     res.render('index')
   });
   app.use('/auth',authRouter);
+  app.use('/share',shareRouter);
+
   app.use((req,res,next)=>{
     if (req.isAuthenticated()) {
       next()

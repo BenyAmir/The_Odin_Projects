@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clouding File Management - Panel</title>
+    <link rel="stylesheet" type="text/css" href="/styles/panel.css" />
+  </head>
+  <body>
+    <header>
+      this folder is shared by <strong><%= owner.username %></strong>
+    </header>
+    <main>
+      <section class="card">        
+        <div class="directory">
+          <ul>
+          
+           <% directory.children.map(child => { %>
+            <li class="folder" data-id="<%= child.id %>">
+              <span class="title"><%= child.name %></span>
+            </li>
+            <% }) %>
+             <% directory.files.map(file => { %>
+            <li class="file" data-folder-id="<%= directory.id %>" data-id="<%= file.id %>">
+              <span class="title"><a href="/panel/folder/<%= directory.id %>/file/<%= file.id %>"><%= file.displayName %></a></span>
+            </li>
+            <% }) %>
+            
+            
+          </ul>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -26,9 +26,7 @@
         cursor: pointer;
     }
 
-    .editing .edit,
-    .editing .trash,
-    .editing .title {
+    .editing .icon {
         display: none;
     }
 

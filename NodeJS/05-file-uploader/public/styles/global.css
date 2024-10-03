@@ -43,3 +43,7 @@
 .edit {
   background: url(../images/pen.png) no-repeat;
 }
+
+.share {
+  background: url(../images/share.png) no-repeat;
+}

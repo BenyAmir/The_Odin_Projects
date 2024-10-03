@@ -30,14 +30,21 @@
             <% } %> <% directory.children.map(child => { %>
             <li class="folder" data-id="<%= child.id %>">
               <span class="title" onclick="fetchFolder(event)"><%= child.name %></span>
-              <span onclick="editFolder(event)"><i class="icon edit"></i>
+              <span onclick="editFolder(event)">
+                <i class="icon edit"></i>
               <form id="update-folder" class="hidden" action="/panel/folder/<%= child.id %>/update" method="post">
                 <input type="text" value="<%= child.name %>" name="name"/><button type="submit">save</button>
               </form>
               </span>
-              <span onclick="deleteFolder(event)"
-                ><i class="icon trash"></i
-              ></span>
+              <span onclick="deleteFolder(event)">
+                <i class="icon trash"></i>
+              </span>
+              <span onclick="shareFolder(event)">
+                <i class="icon share"></i>
+                <form id="share-folder" class="hidden" action="/share/<%= child.id %>" method="post">
+                  <input type="date" name="expire"/><button type="submit">share</button>
+                </form>
+              </span>
             </li>
             <% }) %>
              <% directory.files.map(file => { %>
@@ -118,6 +125,11 @@
     function deleteFolder(event) {
       const id = event.currentTarget.parentElement.dataset.id;
       window.location.href = `/panel/folder/${id}/delete`;
+    }
+
+    function shareFolder(event) {
+      event.currentTarget.parentElement.classList.add('editing')
+      document.getElementById('share-folder').classList.remove('hidden')
     }
 
     function showCreateFolder() {
