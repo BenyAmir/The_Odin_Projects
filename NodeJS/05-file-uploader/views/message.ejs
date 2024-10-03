@@ -7,11 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/styles/panel.css" />
 </head>
 <body>
-    <header>
-        <h4>
-            hello <%= locals.user.username %>
-        </h4>
-    </header>
+    <%- include('./header.ejs') %>
     <main>
         <section class="card">
             <div class="text-center">

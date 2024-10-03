@@ -78,7 +78,7 @@ exports.login = passport.authenticate("local", {
 
 exports.logout = asyncHandler(async (req,res,next)=>{
   req.logout(function(err) {
-    if (err) { return next(err); }
-    res.json({redirect:'/'})
+  if (err) { return next(err); }
+    res.redirect('/')
   });
 })
